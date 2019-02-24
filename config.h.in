@@ -1,0 +1,4 @@
+// the configured options and settings for demo
+#define Demo_VERSION_MAJOR @Demo_VERSION_MAJOR@
+#define Demo_VERSION_MINOR @Demo_VERSION_MINOR@
+
