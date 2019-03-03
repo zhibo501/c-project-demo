@@ -3,8 +3,10 @@ extern "C" {
 #endif
 
 #include "demo.h"
+#include "log.h"
 
 int adder(int a, int b) {
+    dlog(DBG, "hello adder (a + b)");
     return (a+b);
 }
 

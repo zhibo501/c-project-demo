@@ -1,0 +1,40 @@
+cmake_minimum_required(VERSION 2.8.2)
+
+project(3rd-download NONE)
+
+include(ExternalProject)
+
+ExternalProject_Add(pbc
+  #--Download step--------------
+  GIT_REPOSITORY    https://github.com/protobuf-c/protobuf-c.git
+  GIT_TAG           v1.3.0
+  #--Update/Patch step----------
+  UPDATE_COMMAND    ""
+  #--Configure step-------------
+  SOURCE_DIR        "${CMAKE_CURRENT_BINARY_DIR}/protobuf-c-src"
+  CONFIGURE_COMMAND ""
+  #--Build step-----------------
+  BUILD_COMMAND     ""
+  #--Install step---------------
+  INSTALL_COMMAND   ""
+  #--Test step------------------
+  TEST_COMMAND      ""
+)
+
+ExternalProject_Add(uthash
+  #--Download step--------------
+  GIT_REPOSITORY    https://github.com/troydhanson/uthash.git
+  GIT_TAG           v1.9.9
+  #--Update/Patch step----------
+  UPDATE_COMMAND    ""
+  #--Configure step-------------
+  SOURCE_DIR        "${CMAKE_CURRENT_BINARY_DIR}/uthash-src"
+  CONFIGURE_COMMAND ""
+  #--Build step-----------------
+  BUILD_COMMAND     ""
+  #--Install step---------------
+  INSTALL_COMMAND   ""
+  #--Test step------------------
+  TEST_COMMAND      ""
+)
+

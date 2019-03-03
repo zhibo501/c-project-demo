@@ -1,19 +1,19 @@
 cmake_minimum_required (VERSION 2.8.2)
 
-configure_file(CMakeLists.txt.in gtest-download/CMakeLists.txt)
+configure_file(CMakeLists.txt.in test-download/CMakeLists.txt)
 
 
 execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
   RESULT_VARIABLE result
-  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/gtest-download )
+  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/test-download )
 if(result)
-  message(FATAL_ERROR "CMake step for googletest failed: ${result}")
+  message(FATAL_ERROR "CMake step for test-tools failed: ${result}")
 endif()
 execute_process(COMMAND ${CMAKE_COMMAND} --build .
   RESULT_VARIABLE result
-  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/gtest-download )
+  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/test-download )
 if(result)
-  message(FATAL_ERROR "Build step for googletest failed: ${result}")
+  message(FATAL_ERROR "Build step for test-tools failed: ${result}")
 endif()
 
 # Prevent overriding the parent project's compiler/linker
@@ -33,14 +33,14 @@ if (CMAKE_VERSION VERSION_LESS 2.8.11)
   include_directories("${gtest_SOURCE_DIR}/include")
 endif()
 
-include_directories ("${PROJECT_SOURCE_DIR}/src")
-
 # Now simply link against gtest or gtest_main as needed. Eg
-add_executable(demo_gtest_bin demo_testcase.cpp)
-target_link_libraries(demo_gtest_bin demoLib gtest_main gmock_main)
+add_executable(demo_test_bin demo_testcase.cpp)
+target_link_libraries(demo_test_bin demo gtest_main gmock_main)
 
-#add_test(NAME demo_test COMMAND demo_gtest_bin)
-#add_test(demo_test_run demo_gtest_bin)
+if (CMAKE_VERSION VERSION_LESS 3.9.0)
+add_test(demo_run_case demo_test_bin)
+else()
 include(GoogleTest)
-gtest_add_tests(demo_gtest_bin "" AUTO)
+gtest_add_tests(demo_test_bin "" AUTO)
+endif()
 
